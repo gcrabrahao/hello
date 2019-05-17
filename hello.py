@@ -6,7 +6,7 @@ from flask import abort
 app = Flask(__name__)
 
 def find_user(userid):
-	if userid == "john":
+	if userid == "john1":
 		return "1234"
 	else:
 		return ""
