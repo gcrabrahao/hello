@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+  geat:
+    build: .
+    container_name: hello_web
+    image: hello:latest
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
