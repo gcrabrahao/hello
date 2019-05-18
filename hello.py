@@ -2,12 +2,14 @@
 import re
 from flask import Flask, jsonify
 from flask import abort
+from models import User
 
 app = Flask(__name__)
 
 def find_user(userid):
-	if userid == "john1":
-		return "1234"
+	u = User.query.filter(User.userid == userid).first()
+	if u:
+		return u.ext
 	else:
 		return ""
 
