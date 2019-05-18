@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
-engine = create_engine('mysql://root:QQVXCAKDPEvR7vinX9P4FQxnt4UhHLes@localhost:3306/hello', convert_unicode=True)
+engine = create_engine('mysql://root:QQVXCAKDPEvR7vinX9P4FQxnt4UhHLes@10.15.242.153:3306/hello', convert_unicode=True)
 db_session = scoped_session(sessionmaker(autocommit=False,
                                          autoflush=False,
                                          bind=engine))
