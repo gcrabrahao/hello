@@ -1,8 +1,16 @@
+import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
-engine = create_engine('mysql://root:QQVXCAKDPEvR7vinX9P4FQxnt4UhHLes@10.15.242.153:3306/hello', convert_unicode=True)
+host = os.environ.get('DB_HOST')
+user = os.environ.get('DB_USER')
+pwd = os.environ.get('DB_PASSWORD')
+connect_string = 'mysql://'+user+':'+pwd+'@'+host+':3306/hello'
+print(connect_string)
+
+engine = create_engine(connect_string, convert_unicode=True)
+
 db_session = scoped_session(sessionmaker(autocommit=False,
                                          autoflush=False,
                                          bind=engine))
