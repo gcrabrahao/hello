@@ -1,6 +1,6 @@
 FROM python:3.6
 ADD . /app
-ADD ../db /app
+ADD /app
 WORKDIR /app
 RUN pip install flask gunicorn Flask-SQLAlchemy mysqlclient
 EXPOSE 8080
