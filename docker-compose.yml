@@ -1,10 +1,24 @@
 version: '2'
 
 services:
-  geat:
+  main:
     build: .
-    container_name: hello_web
-    image: hello:latest
+    container_name: main
+    image: main:latest
     restart: unless-stopped
     ports:
       - "8080:8080"
+  name:
+    build: .
+    container_name: name
+    image: name:latest
+    restart: unless-stopped
+    ports:
+      - "8081:8080"
+  extension:
+    build: .
+    container_name: extension
+    image: extension:latest
+    restart: unless-stoped
+    ports:
+      - "8082:8080"

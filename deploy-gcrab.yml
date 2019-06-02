@@ -24,7 +24,7 @@ spec:
         env: dsv
     spec:
       containers:
-      - image: gcr.io/crucial-amp-240715/github.com/gcrabrahao/hello:f588be918bf29600c7a3cc4f00d32d0f513c4c76
+      - image: gcr.io/crucial-amp-240715/github.com/gcrabrahao/hello:98e960cde189f75740806bc778c03933dc8230c2
         name: gcrab-pod
         env:
         - name: DB_HOST
