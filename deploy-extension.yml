@@ -31,7 +31,7 @@ spec:
         - containerPort: 8080
         env:
         - name: DB_HOST
-          value: "35.225.68.165"
+          value: "172.29.112.3"
         - name: DB_USER
           value: "root"
         - name: DB_PASSWORD
