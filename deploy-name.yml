@@ -1,0 +1,41 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: "name"
+    env: "dsv"
+    version: "v1"
+  name: name-deploy
+  namespace: dsv
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: name
+      env: dsv
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: name
+        env: dsv
+    spec:
+      containers:
+      - image: gcr.io/istio-demo-241522/name:f8bcd07
+        name: name-pod
+        ports:
+        - containerPort: 8080
+        env:
+        - name: DB_HOST
+          value: "35.225.68.165"
+        - name: DB_USER
+          value: "root"
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysqlsecret
+              key: passwd

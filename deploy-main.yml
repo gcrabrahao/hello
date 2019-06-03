@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: main-account
+  namespace: dsv
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: main
+    env: dsv
+    version: v1
+  name: main-deploy
+  namespace: dsv
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: main
+      env: dsv
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: main
+        env: dsv
+    spec:
+      serviceAccountName: main-account
+      containers:
+      - image: gcr.io/istio-demo-241522/main:c59f7c8
+        name: main-pod
+        ports:
+        - containerPort: 8080
+        env:
+        - name: NAME_SVC
+          value: "http://name-deploy-service:8080/v1/name"
+        - name: EXTENSION_SVC
+          value: "http://extension-deploy-service:8080/v1/extension"

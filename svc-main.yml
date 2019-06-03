@@ -1,0 +1,19 @@
+---
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: "main-deploy-service"
+  namespace: "dsv"
+  labels:
+    app: "main"
+    env: "dsv"
+spec:
+  ports:
+  - name: "http"
+    port: 8080
+    targetPort: 8080
+  selector:
+    app: "main"
+    env: "dsv"
+  type: "ClusterIP"
+

@@ -1,0 +1,43 @@
+apiVersion: "rbac.istio.io/v1alpha1"
+kind: ServiceRole
+metadata:
+  name: main-viewer
+  namespace: dsv
+spec:
+  rules:
+  - services: ["main-deploy-service.dsv.svc.cluster.local"]
+    methods: ["GET"]
+---
+apiVersion: "rbac.istio.io/v1alpha1"
+kind: ServiceRoleBinding
+metadata:
+  name: bind-main-viewer
+  namespace: dsv
+spec:
+  subjects:
+  - user: "*"
+  roleRef:
+    kind: ServiceRole
+    name: "main-viewer"
+---
+apiVersion: "rbac.istio.io/v1alpha1"
+kind: ServiceRole
+metadata:
+  name: svc-viewer
+  namespace: dsv
+spec:
+  rules:
+  - services: ["name-deploy-service.dsv.svc.cluster.local", "extension-deploy-service.dsv.svc.cluster.local"]
+    methods: ["GET"]
+---
+apiVersion: "rbac.istio.io/v1alpha1"
+kind: ServiceRoleBinding
+metadata:
+  name: bind-svc-viewer
+  namespace: dsv
+spec:
+  subjects:
+  - user: "cluster.local/ns/dsv/sa/main-account"
+  roleRef:
+    kind: ServiceRole
+    name: "svc-viewer"

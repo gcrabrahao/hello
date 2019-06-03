@@ -1,0 +1,66 @@
+apiVersion: "authentication.istio.io/v1alpha1"
+kind: "Policy"
+metadata:
+  name: "extension"
+  namespace: "dsv"
+spec:
+  targets:
+  - name:  extension-deploy-service
+  peers:
+  - mtls: {}
+---
+apiVersion: "networking.istio.io/v1alpha3"
+kind: "DestinationRule"
+metadata:
+  name: "extension"
+  namespace: "dsv"
+spec:
+  host: "extension-deploy-service.dsv.svc.cluster.local"
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
+---
+apiVersion: "authentication.istio.io/v1alpha1"
+kind: "Policy"
+metadata:
+  name: "name"
+  namespace: "dsv"
+spec:
+  targets:
+  - name:  name-deploy-service
+  peers:
+  - mtls: {}
+---
+apiVersion: "networking.istio.io/v1alpha3"
+kind: "DestinationRule"
+metadata:
+  name: "name"
+  namespace: "dsv"
+spec:
+  host: "name-deploy-service.dsv.svc.cluster.local"
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
+---
+apiVersion: "authentication.istio.io/v1alpha1"
+kind: "Policy"
+metadata:
+  name: "main"
+  namespace: "dsv"
+spec:
+  targets:
+  - name:  main-deploy-service
+  peers:
+  - mtls: {}
+---
+apiVersion: "networking.istio.io/v1alpha3"
+kind: "DestinationRule"
+metadata:
+  name: "main"
+  namespace: "dsv"
+spec:
+  host: "main-deploy-service.dsv.svc.cluster.local"
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
+
